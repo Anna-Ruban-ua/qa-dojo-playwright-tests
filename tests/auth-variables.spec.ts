@@ -6,7 +6,7 @@ const password = 'qwerty12345';
 const invalidPassword = 'qwerty12345invalid';
 const articlesPage = '/articles';
 const registerPage = '/register';
-const loinPage = '/login';
+const loginPage = '/login';
 
 test.describe('Registration', { tag: '@auth' }, () => {
   test('Success registration with valid data', async ({ page }) => {
@@ -149,7 +149,7 @@ test.describe('Login', { tag: '@auth' }, () => {
     await authSubmitButton.click();
     await page.context().clearCookies();
     
-    await page.goto(loinPage);
+    await page.goto(loginPage);
     await expect(signInContainer).toBeVisible();
     await expect(demoCredentialsContainer).toBeVisible();
 
@@ -180,7 +180,7 @@ test.describe('Login', { tag: '@auth' }, () => {
     await authSubmitButton.click();
     await page.context().clearCookies();
 
-    await page.goto(loinPage);
+    await page.goto(loginPage);
     await emailInput.fill(email);
     await passwordInput.fill(invalidPassword);
     await authSubmitButton.click();
@@ -196,7 +196,7 @@ test.describe('Login', { tag: '@auth' }, () => {
     const errorMessageText = page.getByTestId('error-messages').getByRole('paragraph');
     const email = uniqueEmail();
 
-    await page.goto(loinPage);
+    await page.goto(loginPage);
     await emailInput.fill(email);
     await passwordInput.fill(invalidPassword);
     await authSubmitButton.click();
