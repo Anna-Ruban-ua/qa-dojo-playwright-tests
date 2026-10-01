@@ -8,7 +8,7 @@ test.describe('Registration', { tag: '@auth' }, () => {
     const username = validUsername();
     const email = uniqueEmail();
 
-    await page.goto('');
+    await page.goto('/articles');
     await page.getByTestId('nav-sign-up').click();
     await expect(page.getByText('Join the paperCreate an')).toBeVisible();
     await expect(page.getByText('Demo credentialsEmailolena@')).toBeVisible();
