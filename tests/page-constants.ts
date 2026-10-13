@@ -8,3 +8,13 @@ export const paths = {
   registerPage: '/register',
   loginPage: '/login',
 };
+
+export const registeredUser = {
+  email: 'olena@example.com',
+  password: 'password',
+};
+
+export const articlesData = {
+  description: 'This is description',
+  text: 'This is text',
+}
