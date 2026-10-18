@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
-import { subjects, priorities, errors } from './page-constants';
+import { subjects, priorities, errors, screenshot } from './page-constants';
 import {
   getLocators,
   openFeedBackPage,
@@ -8,57 +8,51 @@ import {
   fillAllFields,
 } from './feedbackPage-actions';
 
-export const testData = {
-  test1: {
+export const testData = [
+  {
     testName: 'all',
     name: 'Anna',
     email: 'anna.ruban@gmail.com',
     message: 'This is the TEST message',
     subject: subjects[0],
     priority: priorities[0],
-    attachment: {
-      name: 'test-attachment.txt',
-      mimeType: 'text/plain',
-      buffer: Buffer.from('This is a test file content'),
-    },
+    attachment: screenshot,
     fillForm: fillAllFields,
     verify: async function (page: Page) {
-      const { successMessage } = getLocators(page);
+      const { successMessage, errorsContainer } = getLocators(page);
       await expect(successMessage()).toBeVisible();
+      await expect(errorsContainer()).toBeHidden();
     },
   },
-  test2: {
+  {
     testName: 'required',
     name: 'Anna',
     email: 'anna.ruban@gmail.com',
     message: 'This is the TEST message',
     fillForm: fillRequiredFields,
     verify: async function (page: Page) {
-      const { successMessage } = getLocators(page);
+      const { successMessage, errorsContainer } = getLocators(page);
       await expect(successMessage()).toBeVisible();
+      await expect(errorsContainer()).toBeHidden();
     },
   },
-  test3: {
+  {
     testName: 'optional',
-    message: 'This is the TEST message',
     subject: subjects[1],
     priority: priorities[1],
-    attachment: {
-      name: 'test-attachment.txt',
-      mimeType: 'text/plain',
-      buffer: Buffer.from('This is a test file content'),
-    },
+    attachment: screenshot,
     fillForm: fillOptionalFields,
     verify: async function (page: Page) {
-      const { errorMessages } = getLocators(page);
+      const { successMessage, errorMessages } = getLocators(page);
+      await expect(successMessage()).toBeHidden();
       await expect(errorMessages(errors.nameError)).toBeVisible();
       await expect(errorMessages(errors.emailError)).toBeVisible();
       await expect(errorMessages(errors.messageError)).toBeVisible();
     },
   },
-};
+];
 
-for (const data of Object.values(testData)) {
+for (const data of testData) {
   test(`Feedback form ${data.testName} fields validation`, async ({ page }) => {
     const { submitButton } = getLocators(page);
 

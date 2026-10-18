@@ -33,3 +33,12 @@ export const errors = {
   emailError: 'email некоректний email',
   messageError: "message обов'язкове поле",
 };
+
+export const screenshot = {
+  name: 'screenshot.png',
+  mimeType: 'image/png',
+  buffer: Buffer.from(
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==',
+    'base64',
+  ),
+};

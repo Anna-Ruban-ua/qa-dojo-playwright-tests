@@ -11,6 +11,7 @@ export function getLocators(page: Page) {
     attachmentsInput: () => page.getByTestId('contact-attachments'),
     copyCheckbox: () => page.getByTestId('contact-copy-me'),
     submitButton: () => page.getByTestId('contact-submit'),
+    errorsContainer: () => page.getByTestId('error-messages'),
     errorMessages: (error: string) =>
       page.getByTestId('error-messages').getByText(error),
     successMessage: () => page.getByTestId('contact-success'),
@@ -26,7 +27,7 @@ export type RequiredFields = {
 export type OptionalFields = {
   subject: string;
   priority: string;
-  attachment: string;
+  attachment: { name: string; mimeType: string; buffer: Buffer };
 };
 
 export async function openFeedBackPage(page: Page) {
