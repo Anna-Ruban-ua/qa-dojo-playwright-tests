@@ -1,8 +1,12 @@
-import type { Page } from '@playwright/test';
+import { expect, type Page } from '@playwright/test';
+import { paths } from './page-constants';
+
 export const validUsername = () => `student-${Date.now()}-${Math.random()}`;
 
 export const uniqueEmail = () =>
   `student-${Date.now()}-${Math.random()}@example.com`;
+
+export const title = () => `Test Title ${Date.now().toString(36)}`;
 
 export function getLocators(page: Page) {
   const signUpButton = page.getByTestId('nav-sign-up');
@@ -21,6 +25,14 @@ export function getLocators(page: Page) {
   const confirmPasswordInput = page.getByTestId('register-confirm-password');
   const termsCheckbox = page.getByTestId('register-terms');
   const profileNav = page.getByTestId('nav-profile');
+  const newArticleButton = page.getByTestId('nav-new-article');
+  const titleInput = page.getByTestId('editor-title');
+  const descriptionInput = page.getByTestId('editor-description');
+  const bodyTextArea = page.getByTestId('editor-body');
+  const publishButton = page.getByTestId('editor-submit');
+  const articlesTitle = page.getByTestId('preview-title');
+  const articlePageContainer = page.getByTestId('article-page');
+  const profilePageContainer = page.getByTestId('profile-page');
 
   return {
     signUpButton,
@@ -35,6 +47,14 @@ export function getLocators(page: Page) {
     confirmPasswordInput,
     termsCheckbox,
     profileNav,
+    newArticleButton,
+    titleInput,
+    descriptionInput,
+    bodyTextArea,
+    publishButton,
+    articlesTitle,
+    articlePageContainer,
+    profilePageContainer,
   };
 }
 
@@ -75,4 +95,50 @@ export async function checkTermsCheckbox(page: Page) {
 export async function clickAuthSubmitButton(page: Page) {
   const { authSubmitButton } = getLocators(page);
   await authSubmitButton.click();
+}
+
+export async function loginWithRegisteredUser(
+  page: Page,
+  email: string,
+  password: string,
+) {
+  const { signInContainer, demoCredentialsContainer } = getLocators(page);
+  await page.goto(paths.loginPage);
+  await expect(signInContainer).toBeVisible();
+  await expect(demoCredentialsContainer).toBeVisible();
+  await fillUserLoginData(page, email, password);
+  await clickAuthSubmitButton(page);
+}
+
+export async function createArticle(
+  page: Page,
+  title: string,
+  description: string,
+  body: string,
+) {
+  const {
+    newArticleButton,
+    titleInput,
+    descriptionInput,
+    bodyTextArea,
+    publishButton,
+    articlePageContainer,
+  } = getLocators(page);
+  await newArticleButton.click();
+  await titleInput.fill(title);
+  await descriptionInput.fill(description);
+  await bodyTextArea.fill(body);
+  await publishButton.click();
+  await expect(articlePageContainer).toBeVisible();
+}
+
+export async function openProfileFeed(page: Page) {
+  const { profileNav, articlesTitle } = getLocators(page);
+  await profileNav.click();
+  await expect(articlesTitle.nth(9)).toBeVisible();
+}
+
+export async function getAllTitles(page: Page) {
+  const { articlesTitle } = getLocators(page);
+  return articlesTitle.allTextContents();
 }
