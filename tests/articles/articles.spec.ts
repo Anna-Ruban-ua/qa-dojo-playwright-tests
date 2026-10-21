@@ -1,12 +1,12 @@
 import { test, expect, type Page } from '@playwright/test';
-import { registeredUser, articlesData } from './page-constants';
+import { registeredUser } from '../auth/auth-data';
+import { loginWithRegisteredUser } from '../auth/auth-actions';
+import { articlesData, title } from './articles-data';
 import {
-  loginWithRegisteredUser,
   createArticle,
   openProfileFeed,
   getAllTitles,
-  title,
-} from './page-actions';
+} from './articles-actions';
 
 test('Creation of 10 articles by registered user', async ({ page }) => {
   const titles = [];

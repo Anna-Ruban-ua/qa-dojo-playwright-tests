@@ -1,5 +1,5 @@
 import { expect, type Page } from '@playwright/test';
-import { paths } from './page-constants';
+import { paths } from '../shared/paths';
 
 export function getLocators(page: Page) {
   return {

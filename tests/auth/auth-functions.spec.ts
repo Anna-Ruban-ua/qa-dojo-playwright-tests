@@ -1,15 +1,14 @@
 import { test, expect, type Page } from '@playwright/test';
-import { passwords, paths } from './page-constants';
+import { paths } from '../shared/paths';
+import { passwords, validUsername, uniqueEmail } from './auth-data';
 import {
-  uniqueEmail,
-  validUsername,
   getLocators,
   clickSignUpButton,
   fillUserRegisterData,
   fillUserLoginData,
   checkTermsCheckbox,
   clickAuthSubmitButton,
-} from './page-actions';
+} from './auth-actions';
 
 test('Success registration with valid data', async ({ page }) => {
   const {
