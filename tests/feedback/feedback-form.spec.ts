@@ -1,12 +1,12 @@
 import { test, expect, type Page } from '@playwright/test';
-import { subjects, priorities, errors, screenshot } from './page-constants';
+import { subjects, priorities, errors, screenshot } from './feedback-data';
 import {
   getLocators,
   openFeedBackPage,
   fillRequiredFields,
   fillOptionalFields,
   fillAllFields,
-} from './feedbackPage-actions';
+} from './feedback-actions';
 
 export const testData = [
   {
