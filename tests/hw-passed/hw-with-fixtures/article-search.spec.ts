@@ -1,5 +1,5 @@
-import { test, expect } from '../fixtures/fixtures';
-import { search } from '../../src/constants/articles';
+import { test, expect } from '../../fixtures/fixtures';
+import { search } from '../../../src/constants/articles';
 
 test.skip();
 

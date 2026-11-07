@@ -1,7 +1,7 @@
-import { test, expect } from '../fixtures/fixtures';
-import { errors } from '../../src/constants/errors';
-import { priorities, screenshot, subjects } from '../../src/constants/feedback';
-import { feedbackData } from '../../src/utils/dataGenerator';
+import { test, expect } from '../../fixtures/fixtures';
+import { errors } from '../../../src/constants/errors';
+import { priorities, screenshot, subjects } from '../../../src/constants/feedback';
+import { feedbackData } from '../../../src/utils/dataGenerator';
 
 test.skip();
 

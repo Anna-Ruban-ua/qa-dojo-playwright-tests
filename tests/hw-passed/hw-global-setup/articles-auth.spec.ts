@@ -1,5 +1,7 @@
-import { test, expect } from '../fixtures/fixtures';
-import { registeredUser } from '../../src/constants/userData';
+import { test, expect } from '../../fixtures/fixtures';
+import { registeredUser } from '../../../src/constants/userData';
+
+test.skip();
 
 test('Successful login with valid data', async ({
   articlesPage,

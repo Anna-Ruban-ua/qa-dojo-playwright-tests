@@ -1,7 +1,7 @@
-import { test, expect } from '../fixtures/fixtures';
-import { articleData } from '../../src/constants/articles';
-import { registeredUser } from '../../src/constants/userData';
-import { articleTitle } from '../../src/utils/dataGenerator';
+import { test, expect } from '../../fixtures/fixtures';
+import { articleData } from '../../../src/constants/articles';
+import { registeredUser } from '../../../src/constants/userData';
+import { articleTitle } from '../../../src/utils/dataGenerator';
 
 test.skip();
 

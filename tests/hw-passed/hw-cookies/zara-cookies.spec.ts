@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+test.skip();
+
 test.use({
   storageState: { cookies: [], origins: [] },
   channel: 'chrome',
@@ -21,8 +23,10 @@ test('прийняття та зміна cookies', async ({ page, context }) => 
   const cookiePath = '/';
   const originalCookie = cookies.find((cookie) => cookie.name === cookieName);
   expect(originalCookie).toBeDefined();
-  expect(originalCookie).toMatchObject({ domain: cookieDomain, path: cookiePath });
-
+  expect(originalCookie).toMatchObject({
+    domain: cookieDomain,
+    path: cookiePath,
+  });
 
   const newValue = 'zara-changed';
   expect(newValue).not.toBe(originalCookie!.value);

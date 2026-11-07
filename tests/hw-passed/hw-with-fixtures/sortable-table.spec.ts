@@ -1,8 +1,8 @@
-import { test, expect } from '../fixtures/fixtures';
+import { test, expect } from '../../fixtures/fixtures';
 import {
   interactions,
   selectedCounter,
-} from '../../src/constants/interactions';
+} from '../../../src/constants/interactions';
 
 test.skip();
 

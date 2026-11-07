@@ -6,6 +6,8 @@ import {
   fillRequiredFields,
   fillOptionalFields,
   fillAllFields,
+  type RequiredFields,
+  type OptionalFields,
 } from './feedback-actions';
 
 test.skip();
@@ -59,7 +61,7 @@ for (const data of testData) {
     const { submitButton } = getLocators(page);
 
     await openFeedBackPage(page);
-    await data.fillForm(page, data);
+    await data.fillForm(page, data as RequiredFields & OptionalFields);
     await submitButton().click();
     await data.verify(page);
   });
