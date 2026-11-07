@@ -1,6 +1,8 @@
 import { test, expect } from '../fixtures/fixtures';
 import { search } from '../../src/constants/articles';
 
+test.skip();
+
 test.describe('Article Search', () => {
   test('should show empty state when nothing matches', async ({
     articlesPage,

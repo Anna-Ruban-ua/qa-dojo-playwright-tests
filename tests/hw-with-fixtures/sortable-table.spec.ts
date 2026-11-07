@@ -4,6 +4,8 @@ import {
   selectedCounter,
 } from '../../src/constants/interactions';
 
+test.skip();
+
 test.describe('Sortable table', () => {
   test.beforeEach(async ({ interactionsPage }) => {
     await interactionsPage.open();

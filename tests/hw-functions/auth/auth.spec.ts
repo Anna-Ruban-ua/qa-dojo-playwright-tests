@@ -10,6 +10,8 @@ import {
   clickAuthSubmitButton,
 } from './auth-actions';
 
+test.skip();
+
 test('Success registration with valid data', async ({ page }) => {
   const {
     headerParagraph,

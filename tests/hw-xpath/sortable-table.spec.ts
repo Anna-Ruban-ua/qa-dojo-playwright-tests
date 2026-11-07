@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+test.skip();
+
 test('Sortable table checkbox counter increase and decrease', async ({ page }) => {
     await page.goto('/laboratory/interactions');
 

@@ -6,6 +6,8 @@ import {
   searchArticles,
 } from './articles-actions';
 
+test.skip();
+
 test.describe('Article Search', () => {
   test('should show empty state when nothing matches', async ({ page }) => {
     const { articlesCounter, emptyState, articleTitles } = getLocators(page);

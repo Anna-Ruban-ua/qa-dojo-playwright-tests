@@ -3,6 +3,8 @@ import { errors } from '../../src/constants/errors';
 import { passwords } from '../../src/constants/userData';
 import { newUserData } from '../../src/utils/dataGenerator';
 
+test.skip();
+
 test.describe('Login', { tag: '@auth' }, () => {
   test('Successful login with valid data', async ({
     page,

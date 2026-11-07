@@ -6,4 +6,5 @@ export const passwords = {
 export const registeredUser = {
   email: 'olena@example.com',
   password: 'password',
+  name: 'olena',
 };

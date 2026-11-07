@@ -66,7 +66,6 @@ const test = base.extend<Fixtures>({
     await use(new ErrorMessagesComponent(page));
   },
 
-  // Guest by default: registration, login and feedback tests need a signed-out user.
   userToLogin: [null, { option: true }],
 
   login: [

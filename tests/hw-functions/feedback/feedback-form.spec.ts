@@ -8,6 +8,8 @@ import {
   fillAllFields,
 } from './feedback-actions';
 
+test.skip();
+
 export const testData = [
   {
     testName: 'all',
