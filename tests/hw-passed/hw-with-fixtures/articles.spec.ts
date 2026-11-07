@@ -9,6 +9,7 @@ test.describe('Registered user', () => {
   test.use({ userToLogin: registeredUser });
 
   test('Creation of 10 articles', async ({
+    uiLogin,
     headerPage,
     editorPage,
     articlePage,

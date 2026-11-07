@@ -18,3 +18,5 @@ export const feedbackData = () => ({
   email: faker.internet.email({ provider: 'example.com' }),
   message: faker.lorem.sentence(),
 });
+
+export const avatarUrl = faker.image.avatar();

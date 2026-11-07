@@ -4,4 +4,6 @@ export const paths = {
   login: '/login',
   feedback: '/articles/contact',
   interactions: '/laboratory/interactions',
+  profile: '/articles/profile',
+  settings: '/articles/settings',
 };
