@@ -6,7 +6,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export default defineConfig({
   testDir: './tests',
-  globalSetup: './src/utils/global-setup.ts',
+  //globalSetup: './src/utils/global-setup.ts',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -14,7 +14,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     baseURL: process.env.BASE_URL,
-    storageState: 'playwright/.auth/user.json',
+    //storageState: 'playwright/.auth/user.json',
     trace: 'retain-on-failure',
   },
 
