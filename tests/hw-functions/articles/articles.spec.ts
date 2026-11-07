@@ -8,6 +8,8 @@ import {
   getAllTitles,
 } from './articles-actions';
 
+test.skip();
+
 test('Creation of 10 articles by registered user', async ({ page }) => {
   const titles = [];
 

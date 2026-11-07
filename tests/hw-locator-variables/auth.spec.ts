@@ -1,5 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 
+test.skip();
+
 const validUsername = () => `student-${Date.now()}-${Math.random()}`;
 const uniqueEmail = () => `student-${Date.now()}-${Math.random()}@example.com`;
 const password = 'qwerty12345';

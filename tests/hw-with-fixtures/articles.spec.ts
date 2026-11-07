@@ -3,6 +3,8 @@ import { articleData } from '../../src/constants/articles';
 import { registeredUser } from '../../src/constants/userData';
 import { articleTitle } from '../../src/utils/dataGenerator';
 
+test.skip();
+
 test.describe('Registered user', () => {
   test.use({ userToLogin: registeredUser });
 

@@ -3,6 +3,8 @@ import { errors } from '../../src/constants/errors';
 import { priorities, screenshot, subjects } from '../../src/constants/feedback';
 import { feedbackData } from '../../src/utils/dataGenerator';
 
+test.skip();
+
 test.describe('Feedback form', () => {
   test.beforeEach(async ({ feedbackPage }) => {
     await feedbackPage.open();

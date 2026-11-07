@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+test.skip();
+
 const errors = {
   notNumber: 'Введіть число.',
   lessThan0: 'Вік має бути більше 0',

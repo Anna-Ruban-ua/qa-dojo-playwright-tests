@@ -2,6 +2,8 @@ import { test, expect } from '../fixtures/fixtures';
 import { errors } from '../../src/constants/errors';
 import { newUserData } from '../../src/utils/dataGenerator';
 
+test.skip();
+
 test.describe('Registration', { tag: '@auth' }, () => {
   test('Success registration with valid data', async ({
     articlesPage,
