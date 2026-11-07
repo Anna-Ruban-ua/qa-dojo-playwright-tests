@@ -53,7 +53,7 @@ You will:
 
    Save the plan with the Write tool to `plans/<feature>.plan.md`, using the structure from the skill. The `**File:**`
    line of every scenario points to the test file in the feature folder,
-   e.g. `tests/articles/article-search.spec.ts` (see the skill, section 2.5).
+   e.g. `tests/with-fixtures/article-search.spec.ts` (see the skill, section 2.5).
 
 **Quality Standards**:
 - Write steps that are specific enough for any tester to follow

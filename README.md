@@ -21,8 +21,8 @@ variable `BASE_URL`.
 
 ```bash
 npx playwright test                              # all tests
-npx playwright test tests/articles               # one feature
-npx playwright test tests/auth/auth.spec.ts      # one file
+npx playwright test tests/with-fixtures         # current tests only
+npx playwright test tests/with-fixtures/login.spec.ts   # one file
 npx playwright test --grep @auth                 # by tag
 npx playwright test --headed                     # with a visible browser
 ```
@@ -43,10 +43,21 @@ npx playwright show-trace test-results/<test-folder>/trace.zip
 ## Structure
 
 ```
-tests/            one folder per feature, plus seed.spec.ts (start point for the test agents)
-plans/            test plans: what each feature's tests check
-.claude/agents/   Claude Code agents: test planner, generator, healer; docs review
+src/pages/              page objects: <Name>Page.ts (actions) + <Name>PageLocators.ts; Components/ for shared parts
+src/constants/          paths, users, expected texts and errors
+src/utils/              test data generators (Faker)
+tests/fixtures/         fixtures: one per page and component, plus auto login
+tests/with-fixtures/    current tests, one file per feature area
+tests/hw-*/             earlier coursework styles, kept as written:
+                        inline locators, locator variables, functions, XPath, plain JS function
+tests/seed.spec.ts      start point for the test agents
+plans/                  test plans: what each feature's tests check
+.claude/agents/         Claude Code agents: test planner, generator, healer; docs review
 ```
+
+Tests run as a guest by default. A test that needs a signed-in user sets
+`test.use({ userToLogin: registeredUser })`, and the auto `login` fixture signs
+in before it starts.
 
 Test file conventions: `.claude/skills/playwright-cli/references/test-generation.md`, section 2.5.
 

@@ -250,7 +250,7 @@ Save under `plans/<feature>.plan.md`. Use this structure:
 
 #### 1.1. <kebab-case-scenario-name>
 
-**File:** `tests/<feature>/<area>.spec.ts`
+**File:** `tests/with-fixtures/<area>.spec.ts`
 
 **Steps:**
   1. <Concrete user step>
@@ -314,22 +314,19 @@ playwright-cli click e7
 
 For each `- expect:` bullet, add an explicit assertion. See [How generation works](#0-how-generation-works) for details.
 
-Collect the generated code, move locators and repeated steps into the feature's actions module, and add the test to the file given in the plan (see [Project conventions](#25-project-conventions)):
+Collect the generated code, move locators into the page's `<Name>PageLocators` and repeated steps into `<Name>Page` methods (new page → new fixture in `tests/fixtures/fixtures.ts`), and add the test to the file given in the plan (see [Project conventions](#25-project-conventions)):
 
 ```ts
-import { test, expect } from '@playwright/test';
-import { search } from './articles-data';
-import { getLocators, openArticlesPage, searchArticles } from './articles-actions';
+import { test, expect } from '../fixtures/fixtures';
+import { search } from '../../src/constants/articles';
 
 test.describe('Article Search', () => {
-  test('should show empty state when nothing matches', async ({ page }) => {
-    const { articlesCounter, emptyState } = getLocators(page);
+  test('should show empty state when nothing matches', async ({ articlesPage }) => {
+    await articlesPage.open();
+    await articlesPage.search(search.noMatchQuery);
 
-    await openArticlesPage(page);
-    await searchArticles(page, search.noMatchQuery);
-
-    await expect(articlesCounter()).toHaveText(search.noArticlesCounter);
-    await expect(emptyState()).toHaveText(search.emptyStateText);
+    await expect(articlesPage.locators.articlesCounter).toHaveText(search.noArticlesCounter);
+    await expect(articlesPage.locators.emptyState).toHaveText(search.emptyStateText);
   });
 });
 ```
@@ -339,7 +336,7 @@ Rules:
 - The describe name is the plan group name without the ordinal; the test title is the scenario name with spaces instead of hyphens.
 - If the file already exists, add the new test to the matching `test.describe` instead of creating a new file.
 - **No comments in tests**: no `// spec:` / `// seed:` headers, no step comments. A comment is allowed only to explain non-obvious logic in a complex helper function, and even then prefer clearer naming.
-- Import from `@playwright/test`.
+- Import `test` and `expect` from `tests/fixtures/fixtures.ts`, not from `@playwright/test`.
 - **Important**: close the CLI session and stop the background test before moving to the next scenario.
 
 ### 2.3 Generate multiple scenarios
@@ -351,7 +348,7 @@ Loop 2.2 over the targeted scenarios one at a time, restarting the seed between 
 After generation, run the new tests once:
 
 ```bash
-PLAYWRIGHT_HTML_OPEN=never npx playwright test tests/<feature>/<area>.spec.ts -g "<test title>"
+PLAYWRIGHT_HTML_OPEN=never npx playwright test tests/with-fixtures/<area>.spec.ts -g "<test title>"
 ```
 
 Any failure goes to Section 3.
@@ -359,20 +356,27 @@ Any failure goes to Section 3.
 ### 2.5 Project conventions
 
 ```
+src/
+  pages/
+    BasePage.ts, BaseLocator.ts
+    <Name>Page/<Name>Page.ts            # actions (open, fill…, submit…); `locators` field
+    <Name>Page/<Name>PageLocators.ts    # locators only
+    Components/<Name>Component*.ts      # parts shared by several pages (error messages, article previews)
+  constants/                            # paths, user data, expected texts and errors
+  utils/dataGenerator.ts                # unique test data (Faker)
 tests/
-  seed.spec.ts                    # agents' entry point; navigation and shared setup only
-  shared/paths.ts                 # app paths
-  <feature>/
-    <area>.spec.ts                # many tests per file, one file per feature area
-    <feature>-actions.ts          # getLocators(page) + step helpers (open…Page, fill…, search…)
-    <feature>-data.ts             # constants, expected texts, test data generators
+  seed.spec.ts                          # agents' entry point; navigation and shared setup only
+  fixtures/fixtures.ts                  # `test`/`expect` with one fixture per page and component
+  with-fixtures/<area>.spec.ts          # current tests, one file per feature area
+  hw-*/                                 # earlier coursework styles, kept as written
 ```
 
-- A feature folder may hold several spec files (`tests/articles/articles.spec.ts`, `tests/articles/article-search.spec.ts`); they share the folder's actions and data modules.
-- Locators live only in `getLocators(page)`, never inline in tests. Prefer `getByTestId`; the app has `data-testid` on most controls. Otherwise use role locators.
-- Paths come from `tests/shared/paths.ts`; feature strings and data from `<feature>-data.ts`. Reuse another feature's helpers by import (e.g. `../auth/auth-actions`).
+- Tests import `test` and `expect` from `tests/fixtures/fixtures.ts` and get page objects as fixtures; a new page or component gets a fixture there.
+- Locators live only in `<Name>PageLocators` / `<Name>ComponentLocators`, never inline in tests. Tests call page methods for actions and read `page.locators.*` only for assertions. Prefer `getByTestId`; the app has `data-testid` on most controls. Otherwise use role locators.
+- Paths, expected texts and data come from `src/constants/`; generated data from `src/utils/dataGenerator.ts`.
+- Signed-in tests set `test.use({ userToLogin: registeredUser })`; the auto `login` fixture signs in before the test. Default is a guest.
 - The test server is shared and its data persists between runs: never assert absolute counts (articles, users). Compare with a value read in the same test, or create unique data and assert on it.
-- Kept as written, as coursework examples of earlier styles; do not refactor: `tests/auth/auth.spec.ts`, `tests/auth/auth-variables.spec.ts`, `tests/voting-age/voting-age.spec.js`, `tests/laboratory/sortable-table-x-pass.spec.ts`.
+- Kept as written, as coursework examples of earlier styles; do not refactor: `tests/hw-inline-locators/`, `tests/hw-locator-variables/`, `tests/hw-functions/`, `tests/hw-xpath/`, `tests/hw-js-functions/`.
 
 ---
 
@@ -393,7 +397,7 @@ Record the list of failing `<file>:<line>` entries and process them one at a tim
 Run the single failing test in debug mode in the background, then attach:
 
 ```bash
-PLAYWRIGHT_HTML_OPEN=never npx playwright test tests/<feature>/<area>.spec.ts:<line> --debug=cli
+PLAYWRIGHT_HTML_OPEN=never npx playwright test tests/with-fixtures/<area>.spec.ts:<line> --debug=cli
 # wait for "Debugging Instructions" and the tw-XXXX session name
 playwright-cli attach tw-XXXX
 ```
