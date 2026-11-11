@@ -363,7 +363,8 @@ src/
     <Name>Page/<Name>PageLocators.ts    # locators only
     Components/<Name>Component*.ts      # parts shared by several pages (error messages, article previews)
   constants/                            # paths, user data, expected texts and errors
-  utils/dataGenerator.ts                # unique test data (Faker)
+  utils/userDataGenerator.ts            # unique user data (Faker)
+  utils/articleDataGenerator.ts         # unique article data (Faker)
 tests/
   seed.spec.ts                          # agents' entry point; navigation and shared setup only
   fixtures/fixtures.ts                  # `test`/`expect` with one fixture per page and component
@@ -373,7 +374,7 @@ tests/
 
 - Tests import `test` and `expect` from `tests/fixtures/fixtures.ts` and get page objects as fixtures; a new page or component gets a fixture there.
 - Locators live only in `<Name>PageLocators` / `<Name>ComponentLocators`, never inline in tests. Tests call page methods for actions and read `page.locators.*` only for assertions. Prefer `getByTestId`; the app has `data-testid` on most controls. Otherwise use role locators.
-- Paths, expected texts and data come from `src/constants/`; generated data from `src/utils/dataGenerator.ts`.
+- Paths, expected texts and data come from `src/constants/`; generated data from `src/utils/userDataGenerator.ts` and `src/utils/articleDataGenerator.ts`.
 - Signed-in tests set `test.use({ userToLogin: registeredUser })`; the auto `login` fixture signs in before the test. Default is a guest.
 - The test server is shared and its data persists between runs: never assert absolute counts (articles, users). Compare with a value read in the same test, or create unique data and assert on it.
 - Kept as written, as coursework examples of earlier styles; do not refactor: `tests/hw-inline-locators/`, `tests/hw-locator-variables/`, `tests/hw-functions/`, `tests/hw-xpath/`, `tests/hw-js-functions/`.

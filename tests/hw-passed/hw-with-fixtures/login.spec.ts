@@ -1,7 +1,7 @@
 import { test, expect } from '../../fixtures/fixtures';
 import { errors } from '../../../src/constants/errors';
 import { passwords } from '../../../src/constants/userData';
-import { newUserData } from '../../../src/utils/dataGenerator';
+import { newUserData } from '../../../src/utils/userDataGenerator';
 
 test.skip();
 
