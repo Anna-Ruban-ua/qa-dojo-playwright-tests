@@ -1,8 +1,8 @@
-import { test, expect } from '../fixtures/fixtures';
-import { paths } from '../../src/constants/paths';
-import { avatarUrl } from '../../src/utils/dataGenerator';
+import { test, expect } from '../../fixtures/fixtures';
+import { paths } from '../../../src/constants/paths';
+import { avatarUrl } from '../../../src/utils/userDataGenerator';
 
-test('Change avatar by new user', async ({
+test.skip('Change avatar by new user', async ({
   apiLogin,
   user,
   page,

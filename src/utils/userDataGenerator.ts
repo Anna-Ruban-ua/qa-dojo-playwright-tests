@@ -10,9 +10,6 @@ export const newUserData = () => {
   };
 };
 
-export const articleTitle = () =>
-  `${faker.lorem.words(3)} ${Date.now().toString(36)}`;
-
 export const feedbackData = () => ({
   name: faker.person.firstName(),
   email: faker.internet.email({ provider: 'example.com' }),

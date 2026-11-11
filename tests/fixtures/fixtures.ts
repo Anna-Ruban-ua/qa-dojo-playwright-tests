@@ -14,7 +14,7 @@ import {
   UserController,
   UserResponse,
 } from '../../src/controllers/UserController';
-import { newUserData } from '../../src/utils/dataGenerator';
+import { newUserData } from '../../src/utils/userDataGenerator';
 import { createLocalStorage } from '../../src/utils/storageState';
 
 type Fixtures = {
