@@ -2,7 +2,10 @@
   "name": "qa-dojo-hw",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -11,6 +14,7 @@
     "@faker-js/faker": "^9.9.0",
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.6.2",
-    "dotenv": "^18.0.1"
+    "dotenv": "^18.0.1",
+    "prettier": "3.10.0"
   }
 }

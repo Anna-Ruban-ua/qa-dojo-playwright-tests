@@ -1,0 +1,10 @@
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+playwright/
+.playwright/
+.playwright-cli/
+package-lock.json
+.claude/
+.github/

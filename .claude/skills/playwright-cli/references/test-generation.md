@@ -361,7 +361,9 @@ src/
     BasePage.ts, BaseLocator.ts
     <Name>Page/<Name>Page.ts            # actions (open, fill…, submit…); `locators` field
     <Name>Page/<Name>PageLocators.ts    # locators only
-    Components/<Name>Component*.ts      # parts shared by several pages (error messages, article previews)
+    Components/BaseComponent.ts
+    Components/<Name>Component/<Name>Component.ts          # shared parts (header, error messages, article previews)
+    Components/<Name>Component/<Name>ComponentLocators.ts  # locators only
   constants/                            # paths, user data, expected texts and errors
   utils/userDataGenerator.ts            # unique user data (Faker)
   utils/articleDataGenerator.ts         # unique article data (Faker)

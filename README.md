@@ -43,7 +43,7 @@ npx playwright show-trace test-results/<test-folder>/trace.zip
 ## Structure
 
 ```
-src/pages/              page objects: <Name>Page.ts (actions) + <Name>PageLocators.ts; Components/ for shared parts
+src/pages/              page objects: <Name>Page.ts (actions) + <Name>PageLocators.ts; Components/<Name>Component/ for shared parts (same layout)
 src/constants/          paths, users, expected texts and errors
 src/utils/              test data generators (Faker)
 tests/fixtures/         fixtures: one per page and component, plus auto login

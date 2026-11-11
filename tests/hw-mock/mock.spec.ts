@@ -11,7 +11,7 @@ test('Mock request for article title', async ({
   apiLogin,
   articlesPage,
   articlePage,
-  headerPage,
+  headerComponent,
   editorPage,
 }) => {
   const formTitle = `Form-Title-${articleTitle()}`;
@@ -32,7 +32,7 @@ test('Mock request for article title', async ({
   );
 
   await articlesPage.open();
-  await headerPage.openNewArticle();
+  await headerComponent.openNewArticle();
   await editorPage.publishArticle({
     title: formTitle,
     description: articleDescription(),
